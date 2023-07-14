@@ -5,6 +5,6 @@ from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """public class attributr"""
+    """public class attribute"""
     state_id = ""
     name = ""
