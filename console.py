@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('User')
         elif show == '.show':
-            show_instance = "User " + args[5:]
+            show_instance = "User " + self.bracket_remover(args[5:])
             self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "User " + args[8:]
@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('Place')
         elif show == '.show':
-            show_instance = "Place " + args[5:]
+            show_instance = "Place " + self.bracket_remover(args[5:])
             self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "Place " + args[8:]
@@ -82,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('State')
         elif show == '.show':
-            show_instance = "State " + args[5:]
+            show_instance = "State " + self.bracket_remover(args[5:])
             self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "State " + args[8:]
@@ -109,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('City')
         elif show == '.show':
-            show_instance = "City " + args[5:]
+            show_instance = "City " + self.bracket_remover(args[5:])
             self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "City " + args[8:]
