@@ -191,7 +191,6 @@ class HBNBCommand(cmd.Cmd):
             self.count('BaseModel')
         elif show == '.show':
             show_instance = "BaseModel " + self.bracket_remover(args[5:])
-            print(show_instance)
             self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "BaseModel " + args[8:]
@@ -336,7 +335,7 @@ class HBNBCommand(cmd.Cmd):
             if status == 0:
                 print("** class doesn't exist **")
             else:
-                if len(arguments) >= 2:
+                if len(arguments) >= 2 and arguments[1] != '':
                     classname = arguments[0] + "." + arguments[1]
                     for classandid in instances.keys():
                         if classname == classandid:
