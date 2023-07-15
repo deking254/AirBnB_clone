@@ -30,7 +30,10 @@ class HBNBCommand(cmd.Cmd):
         elif show == '.show':
             to_tuple = eval(args[5:])
             if len(to_tuple) > 0:
-                show_instance = "User " + str(to_tuple[0])
+                if type(to_tuple) == str:
+                    show_instance = "User " + to_tuple
+                else:
+                    show_instance = "User " + str(to_tuple[0])
                 self.do_show(show_instance)
             else:
                 self.do_show('User')
@@ -59,6 +62,7 @@ class HBNBCommand(cmd.Cmd):
             self.count('Place')
         elif show == '.show':
             to_tuple = eval(args[5:])
+            print(to_tuple)
             if len(to_tuple) > 0:
                 show_instance = "Place " + str(to_tuple[0])
                 self.do_show(show_instance)
