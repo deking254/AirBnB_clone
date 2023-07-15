@@ -136,7 +136,7 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('Amenity')
         elif show == '.show':
-            show_instance = "Amenity " + args[5:]
+            show_instance = "Amenity " + self.bracket_remover(args[5:])
             self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "Amenity " + args[8:]
@@ -163,7 +163,7 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('Review')
         elif show == '.show':
-            show_instance = "Review " + args[5:]
+            show_instance = "Review " + self.bracket_remover(args[5:])
             self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "Review " + args[8:]
@@ -179,6 +179,33 @@ class HBNBCommand(cmd.Cmd):
                 self.do_update(update_instance)
             else:
                 update_with_dict("Review", dict_checker, turn_totuple(0))
+
+    def do_BaseModel(self, args):
+        """Handles all BaseModel commands"""
+        show = args[:5]
+        destroy = args[:8]
+        update = args[:7]
+        if args == '.all()':
+            self.do_all("BaseModel")
+        elif args == '.count()':
+            self.count('BaseModel')
+        elif show == '.show':
+            show_instance = "BaseModel " + self.bracket_remover(args[5:])
+            self.do_show(show_instance)
+        elif destroy == '.destroy':
+            destroy_instance = "BaseModel " + args[8:]
+            self.do_destroy(destroy_instance)
+        elif update == '.update':
+            turn_totuple = (tuple)(args[7:])
+            print(turn_totuple)
+            dict_checker = self.dictionary_checker(turn_totuple[1])
+            print(turn_totuple[0])
+            if dict_checker == 0:
+                word_nobrackets = self.bracket_remover(args[7:])
+                update_instance = "BaseModel " + word_nobrackets
+                self.do_update(update_instance)
+            else:
+                update_with_dict("BaseModel", dict_checker, turn_totuple(0))
 
     def bracket_remover(self, arg):
         """
@@ -197,14 +224,6 @@ class HBNBCommand(cmd.Cmd):
             return (dictionary)
         except Exception as e:
             return (0)
-
-    def do_BaseModel(self, args):
-        """Handles all BaseModel commands"""
-        print(self.check_args(args))
-        if args == '.all()':
-            self.do_all("BaseModel")
-        elif args == '.count()':
-            self.count('BaseModel')
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
