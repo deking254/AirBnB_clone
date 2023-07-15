@@ -96,6 +96,26 @@ class HBNBCommand(cmd.Cmd):
                 new = User()
                 new.save()
                 print(new.id)
+            elif arg == 'Place':
+                new = Place()
+                new.save()
+                print(new.id)
+            elif arg == 'State':
+                new = State()
+                new.save()
+                print(new.id)
+            elif arg == 'City':
+                new = City()
+                new.save()
+                print(new.id)
+            elif arg == 'Amenity':
+                new = Amenity()
+                new.save()
+                print(new.id)
+            elif arg == 'Review':
+                new = Review()
+                new.save()
+                print(new.id)
             else:
                 print("** class doesn't exist **")
         else:
