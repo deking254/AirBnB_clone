@@ -70,6 +70,10 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return (True)
 
+    def emptyline(self):
+        """handles no input in prompt"""
+        pass
+
     def do_EOF(self, arg):
         """EOF command to exit the program"""
         return (True)
