@@ -28,14 +28,17 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('User')
         elif show == '.show':
-            show_instance = "User " + self.bracket_remover(args[5:])
-            self.do_show(show_instance)
+            to_tuple = eval(args[5:])
+            if len(to_tuple) > 0:
+                show_instance = "User " + str(to_tuple[0])
+                self.do_show(show_instance)
+            else:
+                self.do_show('User')
         elif destroy == '.destroy':
             destroy_instance = "User " + args[8:]
             self.do_destroy(destroy_instance)
         elif update == '.update':
             turn_totuple = (tuple)(args[7:])
-            print(turn_totuple)
             dict_checker = self.dictionary_checker(turn_totuple[1])
             print(turn_totuple[0])
             if dict_checker == 0:
@@ -55,8 +58,12 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('Place')
         elif show == '.show':
-            show_instance = "Place " + self.bracket_remover(args[5:])
-            self.do_show(show_instance)
+            to_tuple = eval(args[5:])
+            if len(to_tuple) > 0:
+                show_instance = "Place " + str(to_tuple[0])
+                self.do_show(show_instance)
+            else:
+                self.do_show('Place')
         elif destroy == '.destroy':
             destroy_instance = "Place " + args[8:]
             self.do_destroy(destroy_instance)
@@ -82,8 +89,12 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('State')
         elif show == '.show':
-            show_instance = "State " + self.bracket_remover(args[5:])
-            self.do_show(show_instance)
+            to_tuple = eval(args[5:])
+            if len(to_tuple) > 0:
+                show_instance = "State " + str(to_tuple[0])
+                self.do_show(show_instance)
+            else:
+                self.do_show('State')
         elif destroy == '.destroy':
             destroy_instance = "State " + args[8:]
             self.do_destroy(destroy_instance)
@@ -109,8 +120,12 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('City')
         elif show == '.show':
-            show_instance = "City " + self.bracket_remover(args[5:])
-            self.do_show(show_instance)
+            to_tuple = eval(args[5:])
+            if len(to_tuple) > 0:
+                show_instance = "City " + str(to_tuple[0])
+                self.do_show(show_instance)
+            else:
+                self.do_show('City')
         elif destroy == '.destroy':
             destroy_instance = "City " + args[8:]
             self.do_destroy(destroy_instance)
@@ -136,8 +151,12 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('Amenity')
         elif show == '.show':
-            show_instance = "Amenity " + self.bracket_remover(args[5:])
-            self.do_show(show_instance)
+            to_tuple = eval(args[5:])
+            if len(to_tuple) > 0:
+                show_instance = "Amenity " + str(to_tuple[0])
+                self.do_show(show_instance)
+            else:
+                self.do_show('Amenity')
         elif destroy == '.destroy':
             destroy_instance = "Amenity " + args[8:]
             self.do_destroy(destroy_instance)
@@ -163,8 +182,12 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('Review')
         elif show == '.show':
-            show_instance = "Review " + self.bracket_remover(args[5:])
-            self.do_show(show_instance)
+            to_tuple = eval(args[5:])
+            if len(to_tuple) > 0:
+                show_instance = "Review " + str(to_tuple[0])
+                self.do_show(show_instance)
+            else:
+                self.do_show('Review')
         elif destroy == '.destroy':
             destroy_instance = "Review " + args[8:]
             self.do_destroy(destroy_instance)
@@ -190,8 +213,12 @@ class HBNBCommand(cmd.Cmd):
         elif args == '.count()':
             self.count('BaseModel')
         elif show == '.show':
-            show_instance = "BaseModel " + self.bracket_remover(args[5:])
-            self.do_show(show_instance)
+            to_tuple = eval(args[5:])
+            if len(to_tuple) > 0:
+                show_instance = "BaseModel " + str(to_tuple[0])
+                self.do_show(show_instance)
+            else:
+                self.do_show('BaseModel')
         elif destroy == '.destroy':
             destroy_instance = "BaseModel " + args[8:]
             self.do_destroy(destroy_instance)
