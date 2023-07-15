@@ -17,7 +17,9 @@ class HBNBCommand(cmd.Cmd):
         the cmd class
     """
     cmd.Cmd.prompt = '(hbnb) '
-
+    def default(self, line):
+        """worry"""
+        print("** class doesn't exist **")
     def do_User(self, args):
         """Handles all User commands"""
         show = args[:5]
@@ -36,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
                     show_instance = "User " + str(to_tuple[0])
                 self.do_show(show_instance)
             else:
-                pass
+                 self.do_show("User")
         elif destroy == '.destroy':
             destroy_instance = "User " + args[8:]
             self.do_destroy(destroy_instance)
