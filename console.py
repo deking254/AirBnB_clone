@@ -329,5 +329,5 @@ class HBNBCommand(cmd.Cmd):
                 if instance_present == 0:
                     print("** no instance found **")
 
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+#if __name__ == '__main__':
+    #HBNBCommand().cmdloop()
