@@ -36,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
                     show_instance = "User " + str(to_tuple[0])
                 self.do_show(show_instance)
             else:
-                self.do_show()
+                pass
         elif destroy == '.destroy':
             destroy_instance = "User " + args[8:]
             self.do_destroy(destroy_instance)
