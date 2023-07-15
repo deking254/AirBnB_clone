@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Cmd program to create a console"""
 import cmd
 import json
 from models.base_model import BaseModel
