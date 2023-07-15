@@ -255,11 +255,13 @@ class HBNBCommand(cmd.Cmd):
             if status == 0:
                 print("** class doesn't exist **")
             else:
-                print(inst)
+                if len(inst) > 0:
+                    print(inst)
         else:
             for value in instances.values():
                 inst.append(value.__str__())
-            print(inst)
+            if len(inst) > 0:
+                print(inst)
 
     def do_update(self, arg):
         """
