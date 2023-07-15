@@ -45,6 +45,141 @@ class HBNBCommand(cmd.Cmd):
             else:
                 update_with_dict("User", dict_checker, turn_totuple(0))
 
+    def do_Place(self, args):
+        """Handles all Place commands"""
+        show = args[:5]
+        destroy = args[:8]
+        update = args[:7]
+        if args == '.all()':
+            self.do_all("Place")
+        elif args == '.count()':
+            self.count('Place')
+        elif show == '.show':
+            show_instance = "Place " + args[5:]
+            self.do_show(show_instance)
+        elif destroy == '.destroy':
+            destroy_instance = "Place " + args[8:]
+            self.do_destroy(destroy_instance)
+        elif update == '.update':
+            turn_totuple = (tuple)(args[7:])
+            print(turn_totuple)
+            dict_checker = self.dictionary_checker(turn_totuple[1])
+            print(turn_totuple[0])
+            if dict_checker == 0:
+                word_nobrackets = self.bracket_remover(args[7:])
+                update_instance = "Place " + word_nobrackets
+                self.do_update(update_instance)
+            else:
+                update_with_dict("Place", dict_checker, turn_totuple(0))
+
+    def do_State(self, args):
+        """Handles all State commands"""
+        show = args[:5]
+        destroy = args[:8]
+        update = args[:7]
+        if args == '.all()':
+            self.do_all("State")
+        elif args == '.count()':
+            self.count('State')
+        elif show == '.show':
+            show_instance = "State " + args[5:]
+            self.do_show(show_instance)
+        elif destroy == '.destroy':
+            destroy_instance = "State " + args[8:]
+            self.do_destroy(destroy_instance)
+        elif update == '.update':
+            turn_totuple = (tuple)(args[7:])
+            print(turn_totuple)
+            dict_checker = self.dictionary_checker(turn_totuple[1])
+            print(turn_totuple[0])
+            if dict_checker == 0:
+                word_nobrackets = self.bracket_remover(args[7:])
+                update_instance = "State " + word_nobrackets
+                self.do_update(update_instance)
+            else:
+                update_with_dict("User", dict_checker, turn_totuple(0))
+
+    def do_City(self, args):
+        """Handles all City commands"""
+        show = args[:5]
+        destroy = args[:8]
+        update = args[:7]
+        if args == '.all()':
+            self.do_all("City")
+        elif args == '.count()':
+            self.count('City')
+        elif show == '.show':
+            show_instance = "City " + args[5:]
+            self.do_show(show_instance)
+        elif destroy == '.destroy':
+            destroy_instance = "City " + args[8:]
+            self.do_destroy(destroy_instance)
+        elif update == '.update':
+            turn_totuple = (tuple)(args[7:])
+            print(turn_totuple)
+            dict_checker = self.dictionary_checker(turn_totuple[1])
+            print(turn_totuple[0])
+            if dict_checker == 0:
+                word_nobrackets = self.bracket_remover(args[7:])
+                update_instance = "City " + word_nobrackets
+                self.do_update(update_instance)
+            else:
+                update_with_dict("City", dict_checker, turn_totuple(0))
+
+    def do_Amenity(self, args):
+        """Handles all Amenity commands"""
+        show = args[:5]
+        destroy = args[:8]
+        update = args[:7]
+        if args == '.all()':
+            self.do_all("Amenity")
+        elif args == '.count()':
+            self.count('Amenity')
+        elif show == '.show':
+            show_instance = "Amenity " + args[5:]
+            self.do_show(show_instance)
+        elif destroy == '.destroy':
+            destroy_instance = "Amenity " + args[8:]
+            self.do_destroy(destroy_instance)
+        elif update == '.update':
+            turn_totuple = (tuple)(args[7:])
+            print(turn_totuple)
+            dict_checker = self.dictionary_checker(turn_totuple[1])
+            print(turn_totuple[0])
+            if dict_checker == 0:
+                word_nobrackets = self.bracket_remover(args[7:])
+                update_instance = "Amenity " + word_nobrackets
+                self.do_update(update_instance)
+            else:
+                update_with_dict("Amenity", dict_checker, turn_totuple(0))
+
+    def do_Review(self, args):
+        """Handles all Review commands"""
+        show = args[:5]
+        destroy = args[:8]
+        update = args[:7]
+        if args == '.all()':
+            self.do_all("Review")
+        elif args == '.count()':
+            self.count('Review')
+        elif show == '.show':
+            show_instance = "Review " + args[5:]
+            self.do_show(show_instance)
+        elif destroy == '.destroy':
+            destroy_instance = "Review " + args[8:]
+            self.do_destroy(destroy_instance)
+        elif update == '.update':
+            turn_totuple = (tuple)(args[7:])
+            print(turn_totuple)
+            dict_checker = self.dictionary_checker(turn_totuple[1])
+            print(turn_totuple[0])
+            if dict_checker == 0:
+                word_nobrackets = self.bracket_remover(args[7:])
+                update_instance = "Review " + word_nobrackets
+                self.do_update(update_instance)
+            else:
+                update_with_dict("Review", dict_checker, turn_totuple(0))
+
     def bracket_remover(self, arg):
         """
             function to remove brackets around string
@@ -394,6 +529,7 @@ class HBNBCommand(cmd.Cmd):
                         break
                 if instance_present == 0:
                     print("** no instance found **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
