@@ -4,8 +4,14 @@ import json
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
+
+
 class HBNBCommand(cmd.Cmd):
+    """
+        the cmd class
+    """
     cmd.Cmd.prompt = '(hbnb) '
+
     def do_User(self, args):
         """Handles all User commands"""
         show = args[:5]
@@ -32,35 +38,54 @@ class HBNBCommand(cmd.Cmd):
                 self.do_update(update_instance)
             else:
                 update_with_dict("User", dict_checker, turn_totuple(0))
+
     def bracket_remover(self, arg):
+        """
+            function to remove brackets around string
+        """
         word = ""
         for letter in arg:
             if letter != "(" and letter != ")" and letter != ",":
                 word += letter
         return (word)
+
     def dictionary_checker(self, args):
+        """
+            function to extract dict from string
+        """
         try:
             dictionary = (dict)(args)
             return (dictionary)
         except Exception as e:
             return (0)
+
     def do_BaseModel(self, args):
-        """Handles all BaseModel commands"""
+        """
+            Handles all BaseModel commands
+        """
         print(self.check_args(args))
         if args == '.all()':
             self.do_all("BaseModel")
         elif args == '.count()':
             self.count('BaseModel')
+
     def do_quit(self, arg):
-        """Quit command to exit the program"""
+        """
+            Quit command to exit the program
+        """
         exit()
+
     def do_EOF(self, arg):
-        """EOF command to exit the program"""
+        """
+            EOF command to exit the program
+        """
         exit()
+
     def do_create(self, arg):
-        """Creates a new instance of BaseModel"""
-        if arg: 
-            
+        """
+            Creates a new instance of BaseModel
+        """
+        if arg:
             if arg == 'BaseModel':
                 new = BaseModel()
                 new.save()
@@ -73,6 +98,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
         else:
             print("** class name missing **")
+
     def check_args(self, arg):
         """
             a function to tokenize the arguments
@@ -101,15 +127,16 @@ class HBNBCommand(cmd.Cmd):
                     first += i
         args.append(first)
         return (args)
+
     def do_show(self, arg=None):
         """
             Prints the string representation of an instance
         """
         status = 0
         instance_present = 0
-        if arg == None:
+        if arg is None:
             print("** class name missing **")
-            return(0)
+            return (0)
         else:
             arguments = self.check_args(arg)
             classnames = []
@@ -138,12 +165,13 @@ class HBNBCommand(cmd.Cmd):
                         print("** no instance found **")
                 else:
                     print("** instance id missing **")
+
     def count(self, args):
         """
             Prints number of instances
         """
         instances = storage.all()
-        instances_array = []
+        inst = []
         status = 0
         if args:
             arguments = self.check_args(args)
@@ -154,18 +182,18 @@ class HBNBCommand(cmd.Cmd):
                     if letter == ".":
                         if word == arguments[0]:
                             status = 1
-                            instances_array.append(instances.get(key).__str__())
+                            inst.append(instances.get(key).__str__())
                         break
                     else:
                         word += letter
             if status == 0:
                 print("** class doesn't exist **")
             else:
-                print(len(instances_array))
+                print(len(inst))
         else:
             for value in instances.values():
-                instances_array.append(value.__str__())
-            print(len(instances_array))
+                inst.append(value.__str__())
+            print(len(inst))
 
     def do_destroy(self, arg=None):
         """
@@ -173,9 +201,9 @@ class HBNBCommand(cmd.Cmd):
         """
         status = 0
         instance_present = 0
-        if arg == None:
+        if arg is None:
             print("** class name missing **")
-            return(0)
+            return (0)
         else:
             arguments = self.check_args(arg)
             classnames = []
@@ -212,7 +240,7 @@ class HBNBCommand(cmd.Cmd):
             Prints all string representation of all instances
         """
         instances = storage.all()
-        instances_array = []
+        inst = []
         status = 0
         if args:
             arguments = self.check_args(args)
@@ -223,29 +251,30 @@ class HBNBCommand(cmd.Cmd):
                     if letter == ".":
                         if word == arguments[0]:
                             status = 1
-                            instances_array.append(instances.get(key).__str__())
+                            inst.append(instances.get(key).__str__())
                         break
                     else:
                         word += letter
             if status == 0:
                 print("** class doesn't exist **")
             else:
-                print(instances_array)
+                print(inst)
         else:
             for value in instances.values():
-                instances_array.append(value.__str__())
-            print(instances_array)
+                inst.append(value.__str__())
+            print(inst)
+
     def do_update(self, arg):
         """
             Updates an instance based on the class name and id
         """
         status = 0
         instance_present = 0
-        if arg == None:
+        if arg is None:
             print("** class name missing **")
-            return(0)
+            return (0)
         else:
-            arguments = self.check_args(arg)
+            args = self.check_args(arg)
             classnames = []
             instances = storage.all()
             for key in instances.keys():
@@ -257,48 +286,49 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         word += letter
             for name in classnames:
-                if name == arguments[0]:
+                if name == args[0]:
                     status = 1
             if status == 0:
                 print("** class doesn't exist **")
             else:
-                if len(arguments) >= 2:
-                    classname = arguments[0] + "." + arguments[1]
+                if len(args) >= 2:
+                    classname = args[0] + "." + args[1]
                     for classandid in instances.keys():
                         if classname == classandid:
-                            if len(arguments) == 2:
+                            if len(args) == 2:
                                 print("** attribute name missing **")
                                 return
                             else:
-                                if len(arguments) ==3:
+                                if len(args) == 3:
                                     print("** value missing **")
                                     return
                                 else:
                                     instance_present = 1
-                                    instance_dict = instances.get(classname).to_dict()
-                                    if instance_dict.get(arguments[2]):
-                                        typeof = type(instance_dict.get(arguments[2]))
-                                        instance_dict.update({arguments[2]:(typeof)(arguments[3])})
-                                        obj = BaseModel(**instance_dict)
+                                    d = instances.get(classname).to_dict()
+                                    if d.get(args[2]):
+                                        typeof = type(d.get(args[2]))
+                                        d.update({args[2]: (typeof)(args[3])})
+                                        obj = BaseModel(**d)
                                     else:
-                                        instance_dict.update({arguments[2]:arguments[3]})
-                                        obj = BaseModel(**instance_dict)
+                                        d.update({args[2]: args[3]})
+                                        obj = BaseModel(**d)
                                     storage.new(obj)
                                     storage.save()
                                     break
                     if instance_present == 0:
                         print("** no instance found **")
                 else:
-                    print("** instance id missing **")  
+                    print("** instance id missing **")
+
     def update_with_dict(classname, dictionary, instance_id=None):
         """
             Updates an instance based on the class name and id
         """
         status = 0
         instance_present = 0
-        if id == None:
+        if id is None:
             print("** instance id missing **")
-            return(0)
+            return (0)
         else:
             classnames = []
             instances = storage.all()
@@ -328,5 +358,7 @@ class HBNBCommand(cmd.Cmd):
                         break
                 if instance_present == 0:
                     print("** no instance found **")
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
