@@ -5,7 +5,7 @@ from models.base_model import BaseModel
 from models.user import User
 from models import storage
 class HBNBCommand(cmd.Cmd):
-    cmd.Cmd.prompt = '(hbnb)'
+    cmd.Cmd.prompt = '(hbnb) '
     def do_User(self, args):
         """Handles all User commands"""
         show = args[:5]
@@ -330,4 +330,4 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
 
 if __name__ == '__main__':
-        HBNBCommand().cmdloop()
+    HBNBCommand().cmdloop()
