@@ -191,6 +191,7 @@ class HBNBCommand(cmd.Cmd):
             self.count('BaseModel')
         elif show == '.show':
             show_instance = "BaseModel " + self.bracket_remover(args[5:])
+            print(show_instance)
             self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "BaseModel " + args[8:]
