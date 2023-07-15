@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#import cmd
+import cmd
 import json
 from models.base_model import BaseModel
 from models.user import User
