@@ -136,6 +136,10 @@ class HBNBCommand(cmd.Cmd):
         """
         status = 0
         instance_present = 0
+        if arg:
+            pass
+        else:
+            arg = None
         if arg is None:
             print("** class name missing **")
             return (0)
@@ -203,6 +207,10 @@ class HBNBCommand(cmd.Cmd):
         """
         status = 0
         instance_present = 0
+        if arg:
+            pass
+        else:
+            arg = None
         if arg is None:
             print("** class name missing **")
             return (0)
@@ -274,6 +282,10 @@ class HBNBCommand(cmd.Cmd):
         """
         status = 0
         instance_present = 0
+        if arg:
+            pass
+        else:
+            arg = None
         if arg is None:
             print("** class name missing **")
             return (0)
