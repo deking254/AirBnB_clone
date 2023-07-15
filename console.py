@@ -51,9 +51,7 @@ class HBNBCommand(cmd.Cmd):
         return (word)
 
     def dictionary_checker(self, args):
-        """
-            function to extract dict from string
-        """
+        """function to extract dict from string"""
         try:
             dictionary = (dict)(args)
             return (dictionary)
@@ -61,9 +59,7 @@ class HBNBCommand(cmd.Cmd):
             return (0)
 
     def do_BaseModel(self, args):
-        """
-            Handles all BaseModel commands
-        """
+        """Handles all BaseModel commands"""
         print(self.check_args(args))
         if args == '.all()':
             self.do_all("BaseModel")
@@ -71,16 +67,12 @@ class HBNBCommand(cmd.Cmd):
             self.count('BaseModel')
 
     def do_quit(self, arg):
-        """
-            Quit command to exit the program
-        """
-        exit()
+        """Quit command to exit the program"""
+        return (True)
 
     def do_EOF(self, arg):
-        """
-            EOF command to exit the program
-        """
-        exit()
+        """EOF command to exit the program"""
+        return (True)
 
     def do_create(self, arg):
         """
