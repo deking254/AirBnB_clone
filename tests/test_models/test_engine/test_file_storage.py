@@ -103,7 +103,7 @@ class FileStorage_Test(unittest.TestCase):
             with open("file.json", "r") as f:
                 self.assertEqual(0, len(f.read()))
         my_model = BaseModel()
-        my_model.name = "Holberton"
+        my_model.name = "School"
         my_model.my_number = 89
         my_model.save()
         with open("file.json", "r") as f:
