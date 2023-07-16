@@ -48,19 +48,19 @@ class HBNBCommand(cmd.Cmd):
         tup = self.parseline(line)
         if tup[1].startswith(".all()"):
             self.do_all(tup[0])
-        #elif tup[1].startswith(".show(") or line.startswith("show("):
-            #if tup[1].endswith(")"):
-                #to_tuple = eval(tup[1][5:])
-                #if type(to_tuple) == str:
-                    #self.do_show(tup[0] + " " + to_tuple)
-                #else:
-                    #if len(to_tuple) > 0:
-                        #show_instance = tup[0] + " " + str(to_tuple[0])
-                        #self.do_show(show_instance)
-                    #else:
-                        #self.do_show(tup[0])
-            #else:
-                #super().default(line)
+        # elif tup[1].startswith(".show(") or line.startswith("show("):
+            # if tup[1].endswith(")"):
+            # to_tuple = eval(tup[1][5:])
+            # if type(to_tuple) == str:
+            # self.do_show(tup[0] + " " + to_tuple)
+            # else:
+            # if len(to_tuple) > 0:
+            # show_instance = tup[0] + " " + str(to_tuple[0])
+            # self.do_show(show_instance)
+            # else:
+            # self.do_show(tup[0])
+            # else:
+            # super().default(line)
         elif tup[1].startswith(".count()") or line.startswith("count("):
             self.count(tup[0])
         elif tup[1].startswith(".destroy(") or line.startswith("destroy("):
