@@ -68,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
                             update = tup[0] + " " + a + " " +  b
                     else:
                         update = tup[0] + " " + a
-                    self.update(update_instance)
+                    self.do_update(update_instance)
                 else:
                     self.do_update(tup[0])
         else:
