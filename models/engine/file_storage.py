@@ -10,6 +10,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage:
     """
     Public class attribute of class FileStorage
@@ -49,3 +50,7 @@ class FileStorage:
                     self.__objects[key] = class_obj(**value)
         except FileNotFoundError:
             return
+
+
+if __name__ == "__main__":
+    unittest.main()

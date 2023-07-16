@@ -48,19 +48,17 @@ class FileStorage_Test(unittest.TestCase):
         self.assertTrue("BaseModel.{}".format(b2.id) in obj_dict)
         self.assertTrue("BaseModel.{}".format(b3.id) in obj_dict)
 
+    def test_no_args(self):
+        """test no args"""
+        self.assertEqual(type(FileStorage()), FileStorage)
+
     def test_new(self):
         """Tests the new method"""
-        fs = FileStorage()
-        fs.new(BaseModel())
-        self.assertTrue(fs.all())
-
-        b = BaseModel()
-        self.assertTrue(hasattr(b, "id"))
-        self.assertEqual(type(b.id), str)
-
-        fs = FileStorage()
-        with self.assertRaises(AttributeError):
-            fs.new(1)
+        obj = BaseModel()
+        storage.new(obj)
+        obj_d = storage.all()
+        key = obj.__class__.__name__ + '.' + str(obj.id)
+        self.assertEqual(obj_d[key] is obj, True)
 
     def test_save(self):
         """Tests the save method"""
@@ -103,11 +101,15 @@ class FileStorage_Test(unittest.TestCase):
             with open("file.json", "r") as f:
                 self.assertEqual(0, len(f.read()))
         my_model = BaseModel()
-        my_model.name = "Holberton"
+        my_model.name = "School"
         my_model.my_number = 89
         my_model.save()
         with open("file.json", "r") as f:
             self.assertNotEqual(0, len(f.read()))
+
+    def test_type(self):
+        """test type in storage"""
+        self.assertEqual(type(storage), FileStorage)
 
 
 if __name__ == '__main__':
