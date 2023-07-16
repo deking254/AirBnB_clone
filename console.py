@@ -2,6 +2,7 @@
 """Cmd program to create a console"""
 import cmd
 import json
+import re
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -17,23 +18,43 @@ class HBNBCommand(cmd.Cmd):
         the cmd class
     """
     cmd.Cmd.prompt = '(hbnb) '
+
     def default(self, line):
+        """the functon that gets executed when command is not found"""
+        command_dict = {
+                "all": self.do_all,
+                "show": self.do_show,
+                }
+        match = re.search(r"\.", line)
+        if match is not None:
+            argl = [line[:match.span()[0]], line[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                cm = command[0]
+                if cm == "show":
+                    call = "{} {}".format(argl[0], command[1])
+                    return command_dict[command[0]](call)
+            else:
+                super().default(line)
+        else:
+            super().default(line)
         tup = self.parseline(line)
         if tup[1].startswith(".all()"):
             self.do_all(tup[0])
-        elif tup[1].startswith(".show(") or line.startswith("show("):
-            if tup[1].endswith(")"):
-                to_tuple = eval(tup[1][5:])
-                if type(to_tuple) == str:
-                    self.do_show(tup[0] + " " + to_tuple)
-                else:
-                    if len(to_tuple) > 0:
-                        show_instance = tup[0] + " " + str(to_tuple[0])
-                        self.do_show(show_instance)
-                    else:
-                        self.do_show(tup[0])
-            else:
-                super().default(line)
+        #elif tup[1].startswith(".show(") or line.startswith("show("):
+            #if tup[1].endswith(")"):
+                #to_tuple = eval(tup[1][5:])
+                #if type(to_tuple) == str:
+                    #self.do_show(tup[0] + " " + to_tuple)
+                #else:
+                    #if len(to_tuple) > 0:
+                        #show_instance = tup[0] + " " + str(to_tuple[0])
+                        #self.do_show(show_instance)
+                    #else:
+                        #self.do_show(tup[0])
+            #else:
+                #super().default(line)
         elif tup[1].startswith(".count()") or line.startswith("count("):
             self.count(tup[0])
         elif tup[1].startswith(".destroy(") or line.startswith("destroy("):
@@ -42,8 +63,8 @@ class HBNBCommand(cmd.Cmd):
                 self.do_destroy(tup[0] + " " + to_tuple)
             else:
                 if len(to_tuple) > 0:
-                   destroy_instance = tup[0] + " " + str(to_tuple[0])
-                   self.do_destroy(destroy_instance)
+                    destroy_instance = tup[0] + " " + str(to_tuple[0])
+                    self.do_destroy(destroy_instance)
                 else:
                     self.do_destroy(tup[0])
         elif tup[1].startswith(".update(") or line.startswith("update("):
@@ -53,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
                 self.do_update(tup[0] + " " + to_tuple)
             else:
                 if len(to_tuple) > 0:
-                    a =  to_tuple[0]
+                    a = to_tuple[0]
                     if len(to_tuple) >= 2:
                         b = to_tuple[1]
                         if type(b) == dict:
@@ -64,9 +85,9 @@ class HBNBCommand(cmd.Cmd):
                             b = (str)(b)
                             if len(to_tuple) >= 3:
                                 c = str(to_tuple[2])
-                                update = tup[0] + " " + a + " " +  b + " " + c
+                                update = tup[0] + " " + a + " " + b + " " + c
                             else:
-                                update = tup[0] + " " + a + " " +  b
+                                update = tup[0] + " " + a + " " + b
                     else:
                         update = tup[0] + " " + a
                     self.do_update(update)
