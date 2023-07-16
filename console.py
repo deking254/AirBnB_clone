@@ -36,7 +36,10 @@ class HBNBCommand(cmd.Cmd):
                 command = [argl[1][:match.span()[0]], match.group()[1:-1]]
                 cm = command[0]
                 if cm in command_dict.keys():
-                    call = "{} {}".format(argl[0], command[1])
+                    if command[1] != '':
+                        call = "{} {}".format(argl[0], command[1])
+                    else:
+                        call = "{}".format(argl[0])
                     return command_dict[command[0]](call)
             else:
                 super().default(line)
