@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
                 super().default(line)
         else:
             super().default(line)
-    def do_tUser(self, args):
+    def do_User(self, args):
         """Handles all User commands"""
         print("oval")
         show = args[:5]
@@ -40,14 +40,14 @@ class HBNBCommand(cmd.Cmd):
             self.count('User')
         elif show == '.show':
             to_tuple = eval(args[5:])
-            if len(to_tuple) > 0:
-                if type(to_tuple) == str:
-                    show_instance = "User " + to_tuple
-                else:
-                    show_instance = "User " + str(to_tuple[0])
-                self.do_show(show_instance)
+            if type(to_tuple) == str:
+                show_instance = "User " + to_tuple
             else:
-                 self.do_show("User")
+                if len(to_tuple) > 0:
+                    show_instance = "User " + str(to_tuple[0])
+                else:
+                    show_instance = "User"
+            self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "User " + args[8:]
             self.do_destroy(destroy_instance)
@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 update_with_dict("User", dict_checker, turn_totuple(0))
 
-    def do_tPlace(self, args):
+    def do_Place(self, args):
         """Handles all Place commands"""
         show = args[:5]
         destroy = args[:8]
@@ -73,14 +73,14 @@ class HBNBCommand(cmd.Cmd):
             self.count('Place')
         elif show == '.show':
             to_tuple = eval(args[5:])
-            if len(to_tuple) > 0:
-                if type(to_tuple) == str:
-                    show_instance = "Place " + to_tuple
-                else:
-                    show_instance = "Place " + str(to_tuple[0])
-                self.do_show(show_instance)
+            if type(to_tuple) == str:
+                show_instance = "Place " + to_tuple
             else:
-                self.do_show('Place')
+                if len(to_tuple) > 0:
+                    show_instance = "Place " + str(to_tuple[0])
+                else:
+                    show_instance = "Place"
+            self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "Place " + args[8:]
             self.do_destroy(destroy_instance)
@@ -394,7 +394,7 @@ class HBNBCommand(cmd.Cmd):
             if status == 0:
                 print("** class doesn't exist **")
             else:
-                if len(arguments) >= 2 and arguments[1] != '':
+                if len(arguments) >= 2:
                     classname = arguments[0] + "." + arguments[1]
                     for classandid in instances.keys():
                         if classname == classandid:
