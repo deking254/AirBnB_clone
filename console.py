@@ -18,10 +18,16 @@ class HBNBCommand(cmd.Cmd):
     """
     cmd.Cmd.prompt = '(hbnb) '
     def default(self, line):
-        """worry"""
-        print("** class doesn't exist **")
-    def do_User(self, args):
+        tup = self.parseline(line)
+        if tup[1].startswith(".all()"):
+            self.do_all(tup[0])
+        elif tup[1].startswith(".show("):
+            self.do_show(tup[0])
+        else:
+            super().default(line)
+    def do_tUser(self, args):
         """Handles all User commands"""
+        print("oval")
         show = args[:5]
         destroy = args[:8]
         update = args[:7]
