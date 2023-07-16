@@ -24,6 +24,9 @@ class HBNBCommand(cmd.Cmd):
         command_dict = {
                 "all": self.do_all,
                 "show": self.do_show,
+                "destroy": self.do_destroy,
+                "count": self.do_count,
+                "update": self.do_update
                 }
         match = re.search(r"\.", line)
         if match is not None:
@@ -32,7 +35,7 @@ class HBNBCommand(cmd.Cmd):
             if match is not None:
                 command = [argl[1][:match.span()[0]], match.group()[1:-1]]
                 cm = command[0]
-                if cm == in command_dict.keys()::
+                if cm in command_dict.keys():
                     call = "{} {}".format(argl[0], command[1])
                     return command_dict[command[0]](call)
             else:
@@ -235,7 +238,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** instance id missing **")
 
-    def count(self, args):
+    def do_count(self, args):
         """
             Prints number of instances
         """
