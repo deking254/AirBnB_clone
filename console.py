@@ -22,7 +22,10 @@ class HBNBCommand(cmd.Cmd):
         if tup[1].startswith(".all()"):
             self.do_all(tup[0])
         elif tup[1].startswith(".show("):
-            self.do_show(tup[0])
+            if tup[1].endswith(")"):
+                self.do_show(tup[0])
+            else:
+                super().default(line)
         else:
             super().default(line)
     def do_tUser(self, args):
