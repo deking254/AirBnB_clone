@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
                 super().default(line)
         else:
             super().default(line)
-    def do_tUser(self, args):
+    def do_User(self, args):
         """Handles all User commands"""
         print("oval")
         show = args[:5]
@@ -40,14 +40,14 @@ class HBNBCommand(cmd.Cmd):
             self.count('User')
         elif show == '.show':
             to_tuple = eval(args[5:])
-            if len(to_tuple) > 0:
-                if type(to_tuple) == str:
-                    show_instance = "User " + to_tuple
-                else:
-                    show_instance = "User " + str(to_tuple[0])
-                self.do_show(show_instance)
+            if type(to_tuple) == str:
+                show_instance = "User " + to_tuple
             else:
-                 self.do_show("User")
+                if len(to_tuple) > 0:
+                    show_instance = "User " + str(to_tuple[0])
+                else:
+                    show_instance = "User"
+            self.do_show(show_instance)
         elif destroy == '.destroy':
             destroy_instance = "User " + args[8:]
             self.do_destroy(destroy_instance)
