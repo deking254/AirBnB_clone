@@ -48,6 +48,7 @@ class HBNBCommand(cmd.Cmd):
                     self.do_destroy(tup[0])
         elif tup[1].startswith(".update(") or line.startswith("update("):
             to_tuple = eval(tup[1][7:])
+            print(to_tuple)
             if type(to_tuple) == str:
                 self.do_update(tup[0] + " " + to_tuple)
             else:
@@ -61,11 +62,11 @@ class HBNBCommand(cmd.Cmd):
                             return
                         else:
                             b = (str)(b)
-                        if len(to_tuple) >= 3:
-                            c = str(to_tuple[2])
-                            update = tup[0] + " " + a + " " +  b + " " + c
-                        else:
-                            update = tup[0] + " " + a + " " +  b
+                            if len(to_tuple) >= 3:
+                                c = str(to_tuple[2])
+                                update = tup[0] + " " + a + " " +  b + " " + c
+                            else:
+                                update = tup[0] + " " + a + " " +  b
                     else:
                         update = tup[0] + " " + a
                     self.do_update(update)
@@ -295,7 +296,6 @@ class HBNBCommand(cmd.Cmd):
         status = 0
         if args:
             arguments = self.check_args(args)
-            instances = storage.all()
             for key in instances.keys():
                 word = ""
                 for letter in key:
@@ -309,13 +309,11 @@ class HBNBCommand(cmd.Cmd):
             if status == 0:
                 print("** class doesn't exist **")
             else:
-                if len(inst) > 0:
-                    print(inst)
+                print(inst)
         else:
             for value in instances.values():
                 inst.append(value.__str__())
-            if len(inst) > 0:
-                print(inst)
+            print(inst)
 
     def do_update(self, arg):
         """
@@ -365,10 +363,36 @@ class HBNBCommand(cmd.Cmd):
                                     if d.get(args[2]):
                                         typeof = type(d.get(args[2]))
                                         d.update({args[2]: (typeof)(args[3])})
-                                        obj = BaseModel(**d)
+                                        if args[0] == "BaseModel":
+                                            obj = BaseModel(**d)
+                                        elif args[0] == "User":
+                                            obj = User(**d)
+                                        elif args[0] == "Place":
+                                            obj = Place(**d)
+                                        elif args[0] == "City":
+                                            obj = City(**d)
+                                        elif args[0] == "Amenity":
+                                            obj = Amenity(**d)
+                                        elif args[0] == "Review":
+                                            obj = Review(**d)
+                                        elif args[0] == "State":
+                                            obj = State(**d)
                                     else:
-                                        d.update({args[2]: args[3]})
-                                        obj = BaseModel(**d)
+                                        d.update({args[2]: (args[3])})
+                                        if args[0] == "BaseModel":
+                                            obj = BaseModel(**d)
+                                        elif args[0] == "User":
+                                            obj = User(**d)
+                                        elif args[0] == "Place":
+                                            obj = Place(**d)
+                                        elif args[0] == "City":
+                                            obj = City(**d)
+                                        elif args[0] == "Amenity":
+                                            obj = Amenity(**d)
+                                        elif args[0] == "Review":
+                                            obj = Review(**d)
+                                        elif args[0] == "State":
+                                            obj = State(**d)
                                     storage.new(obj)
                                     storage.save()
                                     break
