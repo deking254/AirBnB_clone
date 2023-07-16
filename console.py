@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
         tup = self.parseline(line)
         if tup[1].startswith(".all()"):
             self.do_all(tup[0])
-        elif tup[1].startswith(".show("):
+        elif tup[1].startswith(".show(") or line.startswith("show("):
             if tup[1].endswith(")"):
                 to_tuple = eval(tup[1][5:])
                 if type(to_tuple) == str:
@@ -33,42 +33,10 @@ class HBNBCommand(cmd.Cmd):
                         self.do_show(tup[0])
             else:
                 super().default(line)
+        elif tup[1].startswith(".count()") or line.startswith("count("):
+            self.count(tup[0])
         else:
             super().default(line)
-
-    def do_fBaseModel(self, args):
-        """Handles all BaseModel commands"""
-        show = args[:5]
-        destroy = args[:8]
-        update = args[:7]
-        if args == '.all()':
-            self.do_all("BaseModel")
-        elif args == '.count()':
-            self.count('BaseModel')
-        elif show == '.show':
-            to_tuple = eval(args[5:])
-            if len(to_tuple) > 0:
-                if type(to_tuple) == str:
-                    show_instance = "BaseModel " + to_tuple
-                else:
-                    show_instance = "BaseModel " + str(to_tuple[0])
-                self.do_show(show_instance)
-            else:
-                self.do_show('BaseModel')
-        elif destroy == '.destroy':
-            destroy_instance = "BaseModel " + args[8:]
-            self.do_destroy(destroy_instance)
-        elif update == '.update':
-            turn_totuple = (tuple)(args[7:])
-            print(turn_totuple)
-            dict_checker = self.dictionary_checker(turn_totuple[1])
-            print(turn_totuple[0])
-            if dict_checker == 0:
-                word_nobrackets = self.bracket_remover(args[7:])
-                update_instance = "BaseModel " + word_nobrackets
-                self.do_update(update_instance)
-            else:
-                update_with_dict("BaseModel", dict_checker, turn_totuple(0))
 
     def bracket_remover(self, arg):
         """
