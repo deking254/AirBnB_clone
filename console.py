@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
             if match is not None:
                 command = [argl[1][:match.span()[0]], match.group()[1:-1]]
                 cm = command[0]
-                if cm == "show":
+                if cm == in command_dict.keys()::
                     call = "{} {}".format(argl[0], command[1])
                     return command_dict[command[0]](call)
             else:
