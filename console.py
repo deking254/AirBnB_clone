@@ -29,12 +29,48 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     if len(to_tuple) > 0:
                         show_instance = tup[0] + " " + str(to_tuple[0])
+                        self.do_show(show_instance)
                     else:
                         self.do_show(tup[0])
             else:
                 super().default(line)
         elif tup[1].startswith(".count()") or line.startswith("count("):
             self.count(tup[0])
+        elif tup[1].startswith(".destroy(") or line.startswith("destroy("):
+            to_tuple = eval(tup[1][8:])
+            if type(to_tuple) == str:
+                self.do_destroy(tup[0] + " " + to_tuple)
+            else:
+                if len(to_tuple) > 0:
+                   destroy_instance = tup[0] + " " + str(to_tuple[0])
+                   self.do_destroy(destroy_instance)
+                else:
+                    self.do_destroy(tup[0])
+        elif tup[1].startswith(".update(") or line.startswith("update("):
+            to_tuple = eval(tup[1][7:])
+            if type(to_tuple) == str:
+                self.do_update(tup[0] + " " + to_tuple)
+            else:
+                if len(to_tuple) > 0:
+                    a =  to_tuple[0]
+                    if len(to_tuple) >= 2:
+                        b = to_tuple[1]
+                        if type(b) == dict:
+                            b = str(b)
+                            self.update_with_dict(tup[0], b, a)
+                            return
+                        else:
+                            b = (str)(b)
+                        if len(to_tuple) >= 3:
+                            c = str(to_tuple[2])
+                            update = tup[0] + " " + a + " " +  b + " " + c
+                        else:
+                            update = tup[0] + " " + a + " " +  b
+                    else:
+                        update = tup[0] + " " + a
+                    self.update(update_instance)
+                else:
+                    self.do_update(tup[0])
         else:
             super().default(line)
 
@@ -341,13 +377,13 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** instance id missing **")
 
-    def update_with_dict(classname, dictionary, instance_id=None):
+    def update_with_dict(self, classname, dictionary, instance_id):
         """
             Updates an instance based on the class name and id
         """
         status = 0
         instance_present = 0
-        if id is None:
+        if instance_id is None:
             print("** instance id missing **")
             return (0)
         else:
@@ -367,13 +403,26 @@ class HBNBCommand(cmd.Cmd):
             if status == 0:
                 print("** class doesn't exist **")
             else:
-                classname = classname + "." + instance_id
+                classnam = classname + "." + instance_id
                 for classandid in instances.keys():
-                    if classname == classandid:
+                    if classnam == classandid:
                         instance_present = 1
-                        instance_dict = instances.get(classname).to_dict()
-                        instance_dict.update(dictionary)
-                        obj = BaseModel(**instance_dict)
+                        instance_dict = instances.get(classnam).to_dict()
+                        instance_dict.update(eval(dictionary))
+                        if classname == "Place":
+                            obj = Place(**instance_dict)
+                        elif classname == "BaseModel":
+                            obj = BaseModel(**instance_dict)
+                        elif classname == "User":
+                            obj = User(**instance_dict)
+                        elif classname == "State":
+                            obj = State(**instance_dict)
+                        elif classname == "City":
+                            obj = City(**instance_dict)
+                        elif classname == "Review":
+                            obj = Review(**instance_dict)
+                        elif classname == "Amenity":
+                            obj = Amenity(**instance_dict)
                         storage.new(obj)
                         storage.save()
                         break
