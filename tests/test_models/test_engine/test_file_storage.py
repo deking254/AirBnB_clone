@@ -109,6 +109,10 @@ class FileStorage_Test(unittest.TestCase):
         with open("file.json", "r") as f:
             self.assertNotEqual(0, len(f.read()))
 
+    def test_type(self):
+        """test type in storage"""
+        self.assertEqual(type(storage), FileStorage)
+
 
 if __name__ == '__main__':
     unittest.main()
