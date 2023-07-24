@@ -1,0 +1,19 @@
+.places{
+	width:100%;
+}
+.placestitle{
+	font-size: 30px;
+}
+.placesarticles{
+	width:390px;
+	border-color: #FF5A5F;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    text-align: center;
+    margin: 20px;
+}
+.articles{
+	display: flex;
+    padding: 20px;
+}

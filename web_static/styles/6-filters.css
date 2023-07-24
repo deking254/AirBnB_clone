@@ -1,0 +1,80 @@
+.filter{
+	background-color: white;
+	height: 70px;
+	width: 100%;
+	border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: #DDDDDD;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	}
+.search{
+	font-size: 14px;
+	background-color:#FF5A5F;
+	height:48px;
+	color:#FFFFFF;
+	width:20%;
+	border-style: none;
+	border-radius: 4px;
+	margin: auto;
+    margin-right: 30px;
+}
+.search:hover{
+	opacity:90%;
+}
+.locations{
+	width: 25%;
+	height: 100%;
+	border-right-style: solid;
+    border-color: #DDDDDD;
+    border-width: 1px;
+    
+}
+.amenities{
+	width: 25%;
+	height: 100%;
+
+}
+.states{
+	font-weight: 600;
+    margin-bottom: 0px;
+    margin-left: 20px;
+}
+.location{
+	font-weight: 400;
+    font-size: 14px;
+    margin-top: 0px;
+    margin-left: 20px;
+}
+.popover{
+	width:100%;
+	background-color: #FAFAFA;
+	border-width: 1px;
+	border-style: solid;
+    border-radius: 4px;
+    border-color: #DDDDDD;
+	list-style-type: none;
+	visibility: hidden;
+}
+.locations:hover{
+	.popover{
+		visibility: visible;
+	}
+}
+.amenities:hover{
+	.popover{
+		visibility: visible;
+	}
+}
+.listitems{
+	margin-left: 10px;
+}
+.statelist{
+	margin-bottom: 0px;
+}
+.list{
+	padding-inline-start: 10px;
+	list-style: none
+}
